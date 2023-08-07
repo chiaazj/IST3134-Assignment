@@ -1,0 +1,23 @@
+Flow for hadoop:
+amazon_reviews_us_PC_v1_00.tsv imported into hdfs as AMZ_PC
+
+Review
+review.jar input AMZ_PC output AMZ_PC_MR
+
+DataCleaning
+cleaning.jar input AMZ_PC_MR output Clean_df1
+
+Tokenizing
+tokenizing.jar input Clean_df1 output Tokenized
+
+Tokenized
+exported out to python for further analysis
+
+Python
+Import libraries
+Data Importing and Preprocessing
+Text Normalization 
+Sentiment Analysis
+Data grouping
+Word Cloud Generation
+Overall Sentiment Score computing

@@ -1,0 +1,17 @@
+cd ~/newproject
+hdfs dfs -rm -r AMZ_PC_MR.tsv
+javac -classpath `hadoop classpath` -d . ReviewMapper.java ReviewReducer.java ReviewDriver.java
+jar cvf review.jar *.class
+hadoop jar review.jar ReviewDriver /user/hadoop/AMZ_PC.tsv /user/hadoop/AMZ_PC_MR.tsv
+cd ~/newproject/DataCleaning/
+hdfs dfs -rm -r Cleaned_df1
+javac -classpath `hadoop classpath` -d . CleaningMapper.java CleaningReducer.java CleaningDriver.java
+jar cvf cleaning.jar *.class
+hadoop jar cleaning.jar CleaningDriver /user/hadoop/AMZ_PC_MR.tsv /user/hadoop/Cleaned_df1
+cd ~/newproject/Tokenization/
+hdfs dfs -rm -r Tokenized
+javac -classpath `hadoop classpath` -d . TokenizerMapper.java TokenizerReducer.java TokenizerDriver.java
+jar cvf tokenizing.jar *.class
+hadoop jar tokenizing.jar TokenizerDriver /user/hadoop/Cleaned_df1 /user/hadoop/Tokenized
+
+
